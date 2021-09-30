@@ -83,6 +83,25 @@ def dividing_point(arr):
     return n3
 
 
+def fib():
+    """
+    Первый способ рассчета чисел Фибоначчи
+    :return:
+    """
+    prew = cur = 1
+    element = input('Введите номер искомого элемента: ')
+    element = int(element)
+    i = 0
+    for n in range(int(element - 2)):
+        tmp = prew + cur
+        prew = cur
+        cur = tmp
+        i += 1
+
+        print(str(i) + ' элемент последовательности равен ' + str(cur))
+
+
+
 # def find_item(target_value):
 #     """
 #     Метод, который ищет значение в куче / дереве
@@ -109,6 +128,7 @@ if __name__ == '__main__':
     # print(GCD(1220, 5))
     # print(find_largest(list(range(15))))
     # print(contain_duplicates_2(arr2))
-    print(contain_duplicates_3(arr2))
+    # print(contain_duplicates_3(arr2))
     # print(dividing_point(arr))
     # print(dividing_point(arr2))
+    # fib()
