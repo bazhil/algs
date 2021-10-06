@@ -235,6 +235,17 @@ def find_zero(func, dfdx, initial_guess, max_error):
     return x
 
 
+def coin():
+    """
+    Алгоритм имитирующий игральную кость, которая имитирует подброс монетки
+    :return:
+    """
+    x = random.randint(1, 6)
+    if x <= 3:
+        return 'орел'
+    return 'решка'
+
+
 if __name__ == '__main__':
     # print(find_factor(1221))
     # print(find_factor(5122))
@@ -248,4 +259,6 @@ if __name__ == '__main__':
     # print(trapezoid_rule(lambda x: 12*x, 0, 5, 10))
     # print(adaprive_integrate_midpoint(lambda x: 12*x, 0, 5, 5, 1))
 
+    for i in range(100):
+        print(coin())
 
