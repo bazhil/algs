@@ -26,6 +26,24 @@ def find_cell_before(lst: list, value):
             return lst.index(value)
         i += 1
 
+
+def selection_sort(lst: list) -> list:
+    """
+    Сортировка выбором
+    :param lst: список чисел
+    :return:
+    """
+    for i in range(0, len(lst) - 1):
+        smallest = i
+        for j in range(i+1, len(lst)):
+            if lst[j] < lst[smallest]:
+                smallest = j
+        lst[i], lst[smallest] = lst[smallest], lst[i]
+
+    return lst
+
+
 if __name__ == '__main__':
     # iterate([1,2,3,4,5])
-    print(find_cell_before([123,22,1,2,3,19,4,55,5,6,7,8,9], 1))
+    # print(find_cell_before([123,22,1,2,3,19,4,55,5,6,7,8,9], 123))
+    print(selection_sort([123,22,1,2,3,19,4,55,5,6,7,8,9]))
