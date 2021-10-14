@@ -43,7 +43,84 @@ def selection_sort(lst: list) -> list:
     return lst
 
 
+def find_element(lst: list, num: int):
+    """
+    Бессмысленный на питоне алгоритм, который ищет элемент в массиве
+    :param lst: список чисел
+    :param ind: индекс
+    :return:
+    """
+    for i in range(len(lst)):
+        if lst[i] == num:
+            return i
+    return -1
+
+
+def find_min(int_lst: list) -> int:
+    """
+    Алгоритм поиска минимального числа в списке
+    :param int_lst: список чисел
+    :return:
+    """
+    min = int_lst[0]
+    for i in range(len(int_lst)):
+        if int_lst[i] < min:
+            min = int_lst[i]
+
+    return min
+
+
+def find_max(int_arr: list) -> int:
+    """
+    поиск максимального элемента в массиве
+    :param int_arr: массив чисел
+    :return:
+    """
+    max = int_arr[0]
+    for i in range(len(int_arr)):
+        if int_arr[i] > max:
+            max = int_arr[i]
+
+    return max
+
+
+def find_average(int_lst: list) -> int:
+    """
+    Алгоритм нахождение среднего арифметического из списка чисел
+    :param int_lst:
+    :return:
+    """
+    total = 0
+    for i in int_lst:
+        total += i
+
+    return total / len(int_lst)
+
+
+def find_median(int_lst: list) -> int:
+    """
+    алгоритм нахождения медианного значения (нестабильный, нужно дорабатывать)
+    :param int_lst: список чисел
+    :return:
+    """
+    for k1, v1 in enumerate(int_lst):
+        larger = 0
+        smaller = 0
+        for k2, v2 in enumerate(int_lst):
+            if v2 < v1:
+                smaller += 1
+            if v2 > v1:
+                larger += 1
+        if larger == smaller:
+            return v1
+
+
 if __name__ == '__main__':
     # iterate([1,2,3,4,5])
     # print(find_cell_before([123,22,1,2,3,19,4,55,5,6,7,8,9], 123))
-    print(selection_sort([123,22,1,2,3,19,4,55,5,6,7,8,9]))
+    # print(selection_sort([123,22,1,2,3,19,4,55,5,6,7,8,9]))
+    # print(find_element([123, 22, 1, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9], 1))
+    # print(find_min([123, 22, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9]))
+    # print(find_max([123, 22, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9]))
+    # print(find_average([123, 22, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9]))
+    print(find_median([123, 22, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9]))
