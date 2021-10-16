@@ -115,6 +115,35 @@ def find_median(int_lst: list) -> int:
             return v1
 
 
+def insert_item(lst: list, value: int, position: int) -> list:
+    """
+    Бессмысленный на питоне алгоритм для вставки элемента в заданную позицию
+    :param lst: список
+    :param value: переменная
+    :param position: позиция вставки
+    :return:
+    """
+    if position + 1 > len(lst):
+        return
+    for i in lst[len(lst)-1:position+1]:
+        lst[i] = lst[i-1]
+
+    lst[position] = value
+
+    return lst
+
+
+def delete_item(lst: list, position: int) -> list:
+    """
+    Бессмысленный на питоне алгоритм для вставки элемента в заданную позицию
+    :param lst: список
+    :param position: позиция вставки
+    :return:
+    """
+    lst = lst[:position] + lst[position+1:]
+
+    return lst
+
 if __name__ == '__main__':
     # iterate([1,2,3,4,5])
     # print(find_cell_before([123,22,1,2,3,19,4,55,5,6,7,8,9], 123))
@@ -123,4 +152,6 @@ if __name__ == '__main__':
     # print(find_min([123, 22, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9]))
     # print(find_max([123, 22, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9]))
     # print(find_average([123, 22, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9]))
-    print(find_median([123, 22, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9]))
+    # print(find_median([123, 22, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9]))
+    # print(insert_item([123, 22, 5, 6, 7, 8, 9], 1111, 7))
+    print(delete_item([123, 22, 5, 6, 7, 8, 9], 0))
