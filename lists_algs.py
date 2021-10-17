@@ -144,6 +144,39 @@ def delete_item(lst: list, position: int) -> list:
 
     return lst
 
+
+def add_arrays(arr1: list, arr2: list) -> list:
+    """
+    Алгоритм сложения двух матриц
+    :param arr1: список 1 (матрица)
+    :param arr2: список 2 (матрица)
+    :return: результирующий список
+    """
+    result = []
+    for i in range(len(arr1)):
+        for j in range(len(arr2)):
+            new_list = list(map(lambda x, y: x + y, arr1[i], arr2[j]))
+            result.append(new_list)
+
+    return result
+
+
+def multiple_arrays(arr1: list, arr2: list) -> list:
+    """
+    Умножение двух равноразмерных (!!!) матриц
+    :param arr1: список 1 (матрица)
+    :param arr2: список 2 (матрица)
+    :return:
+    """
+    result = []
+    for i in range(len(arr1)):
+        for j in range(len(arr2)):
+            new_list = list(map(lambda x, y: x * y, arr1[i], arr2[j]))
+            result.append(new_list)
+
+    return result
+
+
 if __name__ == '__main__':
     # iterate([1,2,3,4,5])
     # print(find_cell_before([123,22,1,2,3,19,4,55,5,6,7,8,9], 123))
@@ -154,4 +187,6 @@ if __name__ == '__main__':
     # print(find_average([123, 22, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9]))
     # print(find_median([123, 22, 2, 3, 19, 4, 55, 5, 6, 7, 8, 9]))
     # print(insert_item([123, 22, 5, 6, 7, 8, 9], 1111, 7))
-    print(delete_item([123, 22, 5, 6, 7, 8, 9], 0))
+    # print(delete_item([123, 22, 5, 6, 7, 8, 9], 0))
+    # print(add_arrays([[1,2,3], [11, 22, 33]], [[4, 5, 6], [44, 55, 66]]))
+    # print(multiple_arrays([[1,2,3], [11, 22, 33]], [[4, 5, 6], [44, 55, 66]]))
