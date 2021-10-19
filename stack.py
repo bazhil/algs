@@ -29,15 +29,49 @@ class Stack:
         """
         if self.next == 0:
             return
-
         self.next -= 1
 
-        return self.values[self.next]
+        return self.values.pop(-1)
+
+
+class DoubleStack(Stack):
+    """
+    Двойной стек, у которого добавление и извлечение данных идет с обоих сторон
+    """
+    def __init__(self):
+        super().__init__()
+        self.values = [None]
+        self.before = 0
+
+    def push_in_start(self, value):
+        """
+        Помещает элемент в начало стека
+        :param value: переменная
+        :return:
+        """
+        self.values.insert(0, value)
+        self.before += 1
+
+
+    def pop_from_start(self):
+        """
+        Извлекает элемент из начала списка
+        :return:
+        """
+        return self.values.pop(0)
 
 
 if __name__ == '__main__':
-    st = Stack()
+    # st = Stack()
+    # for i in range(5):
+    #     st.push(i)
+    # for i in range(6):
+    #     print(st.pop())
+
+    ds = DoubleStack()
     for i in range(5):
-        st.push(i)
+        ds.push(i)
+        ds.push_in_start(i+10)
     for i in range(6):
-        print(st.pop())
+        print(ds.pop_from_start(), ds.pop())
+
