@@ -58,6 +58,10 @@ class DoubleStack(Stack):
         Извлекает элемент из начала списка
         :return:
         """
+        if self.before == 0:
+            return
+        self.before -= 1
+
         return self.values.pop(0)
 
 
