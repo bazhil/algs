@@ -91,8 +91,7 @@ def insertion_sort(items: list) -> list:
     :param items: неотсортированный стек
     :return:
     """
-    num_items = len(items)
-    for i in range(1, num_items):
+    for i in range(1, len(items)):
         next_item = items[i]
         j = i - 1
         while j >= 0 and next_item < items[j]:
@@ -100,6 +99,23 @@ def insertion_sort(items: list) -> list:
             j -= 1
 
         items[j + 1] = next_item
+
+    return items
+
+
+def selection_sort(items):
+    """
+    Сортировка выбором
+    :param items:
+    :return:
+    """
+    for i in range(len(items)):
+        min = i
+        for j in range(i + 1, len(items)):
+            if items[j] < items[min]:
+                min = j
+
+        items[min], items[i] = items[i], items[min]
 
     return items
 
@@ -127,12 +143,17 @@ if __name__ == '__main__':
     # for i in range(4):
     #     print(second.pop())
 
-    st = Stack()
+    # st = Stack()
     test_data = [9, 2, 6, 10, 3, 1]
-    for i in test_data:
-        st.push(i)
+    # for i in test_data:
+    #     st.push(i)
+    # print(f'Test data: {test_data}')
+    # sorted_data = insertion_sort(test_data)
+    # print(f'Sorted data: {sorted_data}')
+
     print(f'Test data: {test_data}')
-    sorted_data = insertion_sort(test_data)
+    sorted_data = selection_sort(test_data)
     print(f'Sorted data: {sorted_data}')
+
 
 
