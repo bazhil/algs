@@ -38,13 +38,21 @@ def make_heep(values: list) -> list:
     :param values: список чисел
     :return:
     """
-    for i in range(len(values)):
-        ind = i
+    # добавляем каждый элемент в кучу
+    for i in values:
+        # начинаем с нового элемента и работаем до корня
+        ind = values.index(i)
         while ind != 0:
+            # определяем индекс родительской записи
             parent = int((ind - 1) / 2)
+            # если дочерняя запись меньше или равна родительской - выход
             if values[ind] <= values[parent]:
                 break
+
+            # меняем местами родительскую и дочернюю записи
             values[ind], values[parent] = values[parent], values[ind]
+
+            # переходим к родительской записи
             ind = parent
 
     return values
@@ -65,7 +73,7 @@ def heapify(values: list, size: int, root: int):
     if left < size and values[root] < values[left]:
         largest = left
 
-    # проверяем, существует ли правый дочерний элемент, больший, чем корени
+    # проверяем, существует ли правый дочерний элемент, больший, чем корень
     if right < size and values[largest] < values[right]:
         largest = right
 
@@ -101,12 +109,10 @@ if __name__ == '__main__':
     # print(ins_lst)
     # bbl_lst = bubble_sort(test_list)
     # print(bbl_lst)
-    heap_list = make_heep(test_list)
-    print(heap_list)
 
     # top = remove_heap_top(test_list)
     # print(top)
     # heap_top = remove_heap_top(heap_list)
     # print(heap_top)
-    sorted_by_heap = heap_sort(test_list)
-    print(sorted_by_heap)
+    # sorted_by_heap = heap_sort(test_list)
+    # print(sorted_by_heap)
