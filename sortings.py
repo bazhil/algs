@@ -1,4 +1,5 @@
 # coding=utf-8
+import random
 
 
 def insertion_sort(values: list) -> list:
@@ -94,6 +95,25 @@ def heap_sort(values):
     return values
 
 
+def quick_sort(values: list) -> list:
+    """
+    Быстрая сортировка Хоара
+    :param values: список чисел
+    :return:
+    """
+    if len(values) <= 1:
+        return values
+    else:
+        rand = random.choice(values)
+        s_vals = [v for v in values if v < rand]
+        m_vals = [v for v in values if v > rand]
+        e_vals = [v for v in values if v == rand]
+
+        return quick_sort(s_vals) + e_vals + quick_sort(m_vals)
+
+
+
+
 if __name__ == '__main__':
     test_list = [9, 8, 55, 7, 2, 0, 568, 3, 4, 11]
     print(test_list)
@@ -101,12 +121,14 @@ if __name__ == '__main__':
     # print(ins_lst)
     # bbl_lst = bubble_sort(test_list)
     # print(bbl_lst)
-    heap_list = make_heep(test_list)
-    print(heap_list)
+    # heap_list = make_heep(test_list)
+    # print(heap_list)
 
     # top = remove_heap_top(test_list)
     # print(top)
     # heap_top = remove_heap_top(heap_list)
     # print(heap_top)
-    sorted_by_heap = heap_sort(test_list)
-    print(sorted_by_heap)
+    # sorted_by_heap = heap_sort(test_list)
+    # print(sorted_by_heap)
+
+    print(quick_sort(test_list))
