@@ -33,24 +33,6 @@ def bubble_sort(values: list) -> list:
     return values
 
 
-def make_heep(values: list) -> list:
-    """
-    Метод, который превращает список в кучу (не уверен, что все верно)
-    :param values: список чисел
-    :return:
-    """
-    for i in range(len(values)):
-        ind = i
-        while ind != 0:
-            parent = int((ind - 1) / 2)
-            if values[ind] <= values[parent]:
-                break
-            values[ind], values[parent] = values[parent], values[ind]
-            ind = parent
-
-    return values
-
-
 def heapify(values: list, size: int, root: int):
     """
     Преобразование списка в кучу
