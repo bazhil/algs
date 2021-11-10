@@ -79,7 +79,7 @@ def heap_sort(values):
 
 def quick_sort(values: list) -> list:
     """
-    Быстрая сортировка Хоара
+    Быстрая сортировка Хоара (O(N*log N))
     :param values: список чисел
     :return:
     """
@@ -94,6 +94,61 @@ def quick_sort(values: list) -> list:
         return quick_sort(s_vals) + e_vals + quick_sort(m_vals)
 
 
+def merge_sort(values: list, start: int, end: int):
+    """
+    Сортировка слиянием
+    :param values: список чисел
+    :param start: начало
+    :param end: конец
+    :return:
+    """
+    if start >= end:
+        return
+
+    middle = (start + end) // 2
+    merge_sort(values, start, middle)
+    merge_sort(values, middle + 1, end)
+    merge(values, start, end, middle)
+
+
+def merge(values, start, end, middle):
+    """
+    Метод объединяющий подсписки
+    :param values: список чисел для сортировки
+    :param start: начало
+    :param end: конец
+    :param middle: середина
+    :return:
+    """
+    # создаем подсписки
+    left_sublist = values[start:middle + 1]
+    right_sublist = values[middle + 1:end + 1]
+
+    # переменные для прослеживания хода сортировки
+    left_sublist_index = 0
+    right_sublist_index = 0
+    sorted_index = start
+
+    # сортируем подсписки
+    while left_sublist_index < len(left_sublist) and right_sublist_index < len(right_sublist):
+        if left_sublist[left_sublist_index] <= right_sublist[right_sublist_index]:
+            values[sorted_index] = left_sublist[left_sublist_index]
+            left_sublist_index = left_sublist_index + 1
+        else:
+            values[sorted_index] = right_sublist[right_sublist_index]
+            right_sublist_index = right_sublist_index + 1
+
+        sorted_index = sorted_index + 1
+
+    while left_sublist_index < len(left_sublist):
+        values[sorted_index] = left_sublist[left_sublist_index]
+        left_sublist_index = left_sublist_index + 1
+        sorted_index = sorted_index + 1
+
+    while right_sublist_index < len(right_sublist):
+        values[sorted_index] = right_sublist[right_sublist_index]
+        right_sublist_index = right_sublist_index + 1
+        sorted_index = sorted_index + 1
 
 
 if __name__ == '__main__':
@@ -113,4 +168,6 @@ if __name__ == '__main__':
     # sorted_by_heap = heap_sort(test_list)
     # print(sorted_by_heap)
 
-    print(quick_sort(test_list))
+    # print(quick_sort(test_list))
+    merge_sort(test_list, 0, len(test_list) - 1)
+    print(test_list)
