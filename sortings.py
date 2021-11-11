@@ -151,6 +151,33 @@ def merge(values, start, end, middle):
         sorted_index = sorted_index + 1
 
 
+def counting_sort(values: list, max_value: int):
+    """
+    Сортировка подсчетом
+    :param values: список чисел
+    :param max_value: максимальное значение
+    :return:
+    """
+    # инициалищируем счетчик
+    c = [0]*(max_value + 1)
+    for i in range(len(values)):
+        c[values[i]] += 1
+
+    # получаем индексы
+    c[0] = c[0] - 1
+    for i in range(1, max_value + 1):
+        c[i] = c[i] + c[i - 1]
+
+    result = [None] * len(values)
+
+    # для стабильной сортировки делаем реверс списка
+    for x in reversed(values):
+        result[c[x]] = x
+        c[x] = c[x] - 1
+
+    return result
+
+
 if __name__ == '__main__':
     test_list = [9, 8, 55, 7, 2, 0, 568, 3, 4, 11]
     print(test_list)
@@ -169,5 +196,8 @@ if __name__ == '__main__':
     # print(sorted_by_heap)
 
     # print(quick_sort(test_list))
-    merge_sort(test_list, 0, len(test_list) - 1)
-    print(test_list)
+    # merge_sort(test_list, 0, len(test_list) - 1)
+
+
+
+    print(counting_sort(test_list, max(test_list)))
