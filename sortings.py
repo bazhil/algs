@@ -96,7 +96,7 @@ def quick_sort(values: list) -> list:
 
 def merge_sort(values: list, start: int, end: int):
     """
-    Сортировка слиянием
+    Сортировка слиянием. O(N * log N).
     :param values: список чисел
     :param start: начало
     :param end: конец
@@ -153,7 +153,8 @@ def merge(values, start, end, middle):
 
 def counting_sort(values: list, max_value: int):
     """
-    Сортировка подсчетом
+    Сортировка подсчетом.
+    Быстрее O(N * log N).
     :param values: список чисел
     :param max_value: максимальное значение
     :return:
@@ -174,6 +175,36 @@ def counting_sort(values: list, max_value: int):
     for x in reversed(values):
         result[c[x]] = x
         c[x] = c[x] - 1
+
+    return result
+
+
+def bucket_sort(values: list):
+    """
+    Блочная сортировка.
+    Быстрее O(N * log N).
+    :param values: список чисел
+    :return:
+    """
+    # находим максимальное значение и определяем количество блоков
+    max_value = max(values)
+    size = max_value // len(values)
+
+    # создаем n пустых блоков
+    buckets = [[] for i in range(len(values))]
+
+    # раскладываем значения по блокам
+    for i in range(len(values)):
+        j = int(values[i] / size)
+        if j != len(values):
+            buckets[j].append(values[i])
+        else:
+            buckets[len(values)-1].append(values[i])
+
+    # сортируем элементы внутри блоков с помощью сортировки вставкой (или другой, если надо)
+    result = []
+    for z in range(len(values)):
+        result = result + insertion_sort(buckets[z])
 
     return result
 
@@ -199,5 +230,6 @@ if __name__ == '__main__':
     # merge_sort(test_list, 0, len(test_list) - 1)
 
 
+    # print(counting_sort(test_list, max(test_list)))
 
-    print(counting_sort(test_list, max(test_list)))
+    print(bucket_sort(test_list))
