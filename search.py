@@ -1,5 +1,7 @@
 # coding=utf-8
-
+"""
+Файл с алгоритмами поиска
+"""
 
 def linear_search(values: list, target) -> int:
     """

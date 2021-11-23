@@ -1,4 +1,8 @@
 # coding=utf-8
+"""
+Файл с числовыми алгоритмами
+"""
+
 import math
 import random
 
