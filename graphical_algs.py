@@ -54,7 +54,23 @@ def hilbert(level, angle, step):
     t.right(angle)
 
 
+def sierpinski(length, depth):
+    if depth == 0:
+        for i in range(0, 3):
+            t.fd(length)
+            t.left(120)
+    else:
+        sierpinski(length//2, depth-1)
+        t.fd(length//2)
+        sierpinski(length//2, depth-1)
+        t.bk(length//2)
+        t.left(60)
+        t.fd(length//2)
+        t.right(60)
+        sierpinski(length // 2, depth - 1)
+
 
 if __name__ == '__main__':
     # draw_koch_segment(t, 20000)
-    hilbert(12, 90, 20)
+    # hilbert(12, 90, 20)
+    sierpinski(10, 20)
