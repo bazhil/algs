@@ -47,37 +47,7 @@ def queenprint(solution):
         print(line(pos))
 
 
-def horse(row, col, move_number, num_moves_taken):
-    # TODO: проверить и отладить!!!
-    # перемещаем коня в эту позицию
-    num_moves_taken += 1
-    move_number[row, col] = num_moves_taken
-
-    # если конь прошелся по всем клеткам - выходим
-    if num_moves_taken == 64:
-        return
-
-    # массивы для определения допустимости ходов
-    d_rows = [-2, -2, -1, 1, 2, 2, 1, -1]
-    d_cols = [-1, 1, 2, 2, 1, -1, -2, -2]
-
-    # пробуем все допустимые позиции для следующего кода
-    for i in range(7):
-        r = row + d_rows[i]
-        c = col + d_cols[i]
-        if r >= 0 and r < 6 and c >= 0 and c < 6 and move_number[r, c] == 0:
-            if horse(r, c, move_number, num_moves_taken):
-                return True
-
-    # этот ход не работает
-    move_number[row, col] = 0
-
-    return False
-
-
-
-
 if __name__ == '__main__':
-    for solution in list(queens(8)):
-        print(solution)
-    queenprint(random.choice(list(queens())))
+    # for solution in list(queens(8)):
+    #     print(solution)
+    # queenprint(random.choice(list(queens())))
