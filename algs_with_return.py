@@ -48,6 +48,6 @@ def queenprint(solution):
 
 
 if __name__ == '__main__':
-    # for solution in list(queens(8)):
-    #     print(solution)
-    # queenprint(random.choice(list(queens())))
+    for solution in list(queens(8)):
+        print(solution)
+    queenprint(random.choice(list(queens())))
