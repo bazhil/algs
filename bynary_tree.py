@@ -16,18 +16,34 @@ class BinaryNode:
         self.right_child = None
 
 
+    def get_var_names(self):
+        """
+        Метод получения имени списком строк
+        :return:
+        """
+        return [k for k, v in globals().items() if v is self]
+
+
+    def __str__(self):
+        """
+        Метод получения имени строкой
+        :return:
+        """
+        return self.get_var_names()[0] or ''
+
+
     def traverse_preorder(self, node):
         """
         Рекуурсивный обход вершин в прямом порядке
         :param node: узел дерева
         :return:
         """
-        print(f'Обработка вершины дерева {node.value}')
+        print(f'Обработка вершины дерева {self.__str__()}')
         if node.left_child:
-            print(f'value of left_child is {node.left_child.value}')
+            print(f'left_child is {node.left_child.__str__()}')
             self.traverse_preorder(node.left_child)
         if node.right_child:
-            print(f'value of right_child is {node.right_child.value}')
+            print(f'right_child is {node.right_child.__str__()}')
             self.traverse_preorder(node.right_child)
 
 
@@ -39,11 +55,11 @@ class BinaryNode:
         :return:
         """
         if node.left_child:
-            print(f'value of left_child is {node.left_child.value}')
+            print(f'value of left_child is {node.left_child.__str__()}')
             self.traverse_inorder(node.left_child)
-        print(f'Обработка вершины дерева {node.value}')
+        print(f'Обработка вершины дерева {self.__str__()}')
         if node.right_child:
-            print(f'value of right_child is {node.right_child.value}')
+            print(f'value of right_child is {node.right_child.__str__()}')
             self.traverse_inorder(node.right_child)
 
 
@@ -54,12 +70,12 @@ class BinaryNode:
         :return:
         """
         if node.left_child:
-            print(f'value of left_child is {node.left_child.value}')
+            print(f'value of left_child is {node.left_child.__str__()}')
             self.traverse_postoder(node.left_child)
         if node.right_child:
-            print(f'value of right_child is {node.right_child.value}')
+            print(f'value of right_child is {node.right_child.__str__()}')
             self.traverse_postoder(node.right_child)
-        print(f'Обработка вершины дерева {node.value}')
+        print(f'Обработка вершины дерева {self.__str__()}')
 
 
     def traverse_depth_first(self, root):
@@ -77,13 +93,13 @@ class BinaryNode:
         while children.values:
             # получаю следующую вершину в очереди
             node = children.pop()
-            print(f'Обработка вершины дерева {node.value}')
+            print(f'Обработка вершины дерева {self.__str__()}')
 
             if node.left_child:
-                print(f'value of left_child is {node.left_child.value}')
+                print(f'value of left_child is {node.left_child.__str__()}')
                 children.push(node.left_child)
             if node.right_child:
-                print(f'value of right_child is {node.right_child.value}')
+                print(f'value of right_child is {node.right_child.__str__()}')
                 children.push(node.right_child)
 
 
@@ -102,6 +118,7 @@ class BinaryNode:
             return None if not self.left_child else self.left_child.find_node(target)
         else:
             return None if not self.right_child else self.right_child.find_node(target)
+
 
 class TreeNode:
     """
@@ -126,9 +143,6 @@ class Branch:
         self.branches = []
 
 
-
-
-
 if __name__ == '__main__':
     # создаю дерево
     root = BinaryNode(4)
@@ -149,8 +163,8 @@ if __name__ == '__main__':
 
 
     # обходим дерево разными способами
-    # root.traverse_preorder(root)
+    root.traverse_preorder(root)
     # root.traverse_inorder(root)
     # root.traverse_postoder(root)
     # root.traverse_depth_first(root)
-    root.find_node(8)
+    # root.find_node(3)
