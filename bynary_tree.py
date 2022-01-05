@@ -29,7 +29,8 @@ class BinaryNode:
         Метод получения имени строкой
         :return:
         """
-        return self.get_var_names()[0] or ''
+        result = self.get_var_names()
+        return result[0] if result else 'UNDEFINED'
 
 
     def traverse_preorder(self, node):
@@ -120,6 +121,31 @@ class BinaryNode:
             return None if not self.right_child else self.right_child.find_node(target)
 
 
+    def add_node(self, new_value):
+        """
+        Добавление вершины к упорядоченному поддереву
+        :return:
+        """
+        # сравниваю значение с уже имеющимся
+        if new_value < self.value:
+            # если новое значение меньше, добавляю его к левому поддереву
+            if self.left_child:
+                self.left_child.add_node(new_value)
+            else:
+                child = BinaryNode(new_value)
+                self.left_child = child
+                self.right_child = None
+
+        # если значение не меньше - добавляю его к правому поддереву
+        else:
+            if self.right_child:
+                self.right_child.add_node(new_value)
+            else:
+                child = BinaryNode(new_value)
+                self.left_child = None
+                self.right_child = child
+
+
 class TreeNode:
     """
     Класс вершины, допускающий любое количество дочерних элементов
@@ -161,6 +187,7 @@ if __name__ == '__main__':
     node5.left_child = node6
     node5.right_child = node8
 
+    root.add_node(10)
 
     # обходим дерево разными способами
     root.traverse_preorder(root)
