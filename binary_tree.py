@@ -169,6 +169,34 @@ class Branch:
         self.branches = []
 
 
+class ExpressionNode:
+    """
+    Вершина дерева математического выражения
+    """
+    def __init__(self, operator, left_operand, right_operand, literal_text):
+        self.operator = operator
+        self.left_operand = left_operand
+        self.right_operand = right_operand
+        self.literal_text = literal_text
+
+
+    def evaluate(self):
+        if self.operator == 'literal':
+            return self.literal_text
+        elif self.operator == 'plus':
+            return self.left_operand.evaluate() + self.right_operand.evaluate()
+        elif self.operator == 'minus':
+            return self.left_operand.evaluate() - self.right_operand.evaluate()
+        elif self.operator == 'times':
+            return self.left_operand.evaluate() * self.right_operand()
+        elif self.operator == 'divide':
+            return self.left_operand.evaluate() / self.right_operand.evaluate()
+        elif self.operator == 'negate':
+            return - self.left_operand.evaluate()
+
+
+
+
 if __name__ == '__main__':
     # создаю дерево
     root = BinaryNode(4)
@@ -190,8 +218,10 @@ if __name__ == '__main__':
     root.add_node(10)
 
     # обходим дерево разными способами
-    root.traverse_preorder(root)
+    # root.traverse_preorder(root)
     # root.traverse_inorder(root)
     # root.traverse_postoder(root)
     # root.traverse_depth_first(root)
     # root.find_node(3)
+
+    root.inorder_with_threads(root)
