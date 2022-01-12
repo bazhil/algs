@@ -195,6 +195,22 @@ class ExpressionNode:
             return - self.left_operand.evaluate()
 
 
+class QuadtreeNode:
+    """
+    Класс узла дерева квадрантов
+    """
+    max_items = 10
+
+    def __init__(self, area):
+        self.area = area
+        self.items = []
+        self.Xmid = (self.area.left + self.area.right) / 2
+        self.Ymid = (self.area.top + self.area.bottom) / 2
+        self.NWChild = None
+        self.NEChild = None
+        self.SEChild = None
+        self.SWChild = None
+
 
 
 if __name__ == '__main__':
