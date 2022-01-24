@@ -195,13 +195,26 @@ class ExpressionNode:
             return - self.left_operand.evaluate()
 
 
+class Rectangle:
+    """
+    Заглушка для создания квадрата
+    """
+    def __init__(self, left, top, wid, hgt):
+        self.left = left
+        self.top = top
+        self.wid = wid
+        self.hgt = hgt
+
+
 class QuadtreeNode:
     """
-    Класс узла дерева квадрантов
+    Класс узла дерева квадрантов (пока не понял, как проверять и отлаживать)
+    Нужно подумать на каком-то примере, в учебнике не все понятно.
     """
     max_items = 10
 
     def __init__(self, area):
+        self.max_items = 10
         self.area = area
         self.items = []
         self.Xmid = (self.area.left + self.area.right) / 2
@@ -211,6 +224,47 @@ class QuadtreeNode:
         self.SEChild = None
         self.SWChild = None
 
+
+    def add_item(self, new_area):
+        # проверяем, полная ли вершина
+        if new_area.items and len(new_area.items) + 1 > new_area.max_items:
+            # разбиваем вершину
+            wid = (new_area.right + new_area.left) / 2
+            hgt = (new_area.bottom + new_area.top) / 2
+            NWChild = QuadtreeNode(Rectangle(new_area.left, new_area.top, wid, hgt))
+            NEChild = QuadtreeNode(Rectangle(new_area.left + wid, new_area.top, wid, hgt))
+            SEChild = QuadtreeNode(Rectangle(new_area.left + wid, new_area.top + hgt, wid, hgt))
+            SWChild = QuadtreeNode(Rectangle(new_area.left, new_area.top + hgt, wid, hgt))
+
+            # раскладываем точки в подходящее поддерево
+            for item in new_area.items:
+                if item.Y < self.Ymid:
+                    if item.X < self.Xmid:
+                        self.NWChild.add_item(item)
+                    else:
+                        self.NEChild.add_item(item)
+                else:
+                    if item.X < self.Xmid:
+                        self.SWChild.add_item(item)
+                    else:
+                        self.SEChild.add_item(item)
+
+            # удаляем вершины
+            new_area.items = []
+
+            # ? добавляем элемент в подходящее поддерево
+            if self.items:
+                self.items.append(item)
+            elif new_area.Y < self.Ymid:
+                if new_area.X < self.Xmid:
+                    self.NWChild.add_item(new_area)
+                else:
+                    self.NEChild.add_item(new_area)
+            else:
+                if new_area.X < self.Xmid:
+                    self.SWChild.add_item(new_area)
+                else:
+                    self.SEChild.add_item(new_area)
 
 
 if __name__ == '__main__':
