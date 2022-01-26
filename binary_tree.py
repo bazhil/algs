@@ -267,6 +267,35 @@ class QuadtreeNode:
                     self.SEChild.add_item(new_area)
 
 
+    def find_item(self, target, result):
+        """
+        Метод, проверяющий есть ли дочерние вершины
+        :param target: целевая вершина
+        :param result: результат
+        :return:
+        """
+        # проверяем, есть ли дочерние вершины
+        if self.items:
+            if target.Y < self.Ymid:
+                if target.X < self.Xmid:
+                    return self.NWChild.find_item(target, result)
+                else:
+                    return self.NEChild.find_item(target, result)
+            else:
+                if target.X < self.Xmid:
+                    return self.SWChild.find_item(target, result)
+                else:
+                    return self.SEChild.find_item(target, result)
+        # если дочерние вершины есть, ищем элементы текущей вершины
+        else:
+            for item in self.items:
+                if item.X == target.X and item.Y == target.Y:
+                    result = item
+                    return True
+            return False
+
+
+
 if __name__ == '__main__':
     # создаю дерево
     root = BinaryNode(4)
