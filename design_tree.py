@@ -18,7 +18,7 @@ def minimax(board_position, move, best_value, player_one, player_two, depth, max
     """
     # величина очков для победы (взял с потолка)
     win = 100
-    loss = -1
+    loss = -100
     # Проверяю, не превышена ли максимально допустимая глубина рекурсии
     if depth > max_depth:
         best_value = None
