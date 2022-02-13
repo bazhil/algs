@@ -55,3 +55,39 @@ def minimax(board_position, move, best_value, player_one, player_two, depth, max
     else:
         # иные возможные варианты
         pass
+
+
+def  start_exhausttive_search():
+    """
+    Запуск полного поиска
+    :return:
+    """
+    # инициализируем лучшее решение, которое заменяет первое тестовое
+    exhausttive_search(0)
+
+
+# хз откуда взялся в книге, добавляю переменную, тк она используется в exhausttive_search
+max_index = None
+
+
+def exhausttive_search(next_index):
+    """
+    Проверяем, закончили ли мы
+    :param next_index:
+    :return:
+    """
+    global max_index
+    if next_index == max_index:
+        # все элементы назначены, значит, мы в терминальной вершине
+        # если тестовое решение лучше, чем последнее найденное - сохраняем его
+        max_index = next_index
+    else:
+        # назначены не все элементы - мы не в терминальной вершине
+        # относим элемент к группе 0
+        exhausttive_search(next_index + 1)
+        # отменяем отнесение элемента к группе 0
+
+        # относим элемент next_index к группе 1
+        exhausttive_search(next_index + 1)
+        # отменяем отнесение элемента к группе 1
+
