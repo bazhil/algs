@@ -91,3 +91,39 @@ def exhausttive_search(next_index):
         exhausttive_search(next_index + 1)
         # отменяем отнесение элемента к группе 1
 
+
+def start_branch_and_bound():
+    """
+    Инициализирует лучшее решение
+    :return:
+    """
+    branch_and_bound(0)
+
+
+def branch_and_bound(next_index):
+    """
+    Метод ветвей и границ
+    :param next_index:
+    :return:
+    """
+    global max_index
+    if next_index == max_index:
+        # все элементы назначены, значит, мы в терминальной вершине
+        # если тестовое решение лучше, чем последнее найденное - сохраняем его
+        max_index = next_index
+    else:
+        # назначены не все элементы, мы не в терминальной вершине
+        # если тестовое значение не может превзойти текущее лучшее - возвращаемся
+        if next_index < max_index:
+            return
+        # относим элемент к группе 0
+        branch_and_bound(next_index + 1)
+        # отменяем отнесение элемента к группе 0
+
+        # относим элемент next_index к группе 1
+        branch_and_bound(next_index + 1)
+        # отменяем отнесение элемента к группе 1
+
+
+
+
