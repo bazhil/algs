@@ -2,6 +2,8 @@
 """
 Алгоритмы деревьев принятия решений
 """
+import random
+
 
 def minimax(board_position, move, best_value, player_one, player_two, depth, max_depth):
     """
@@ -124,6 +126,30 @@ def branch_and_bound(next_index):
         branch_and_bound(next_index + 1)
         # отменяем отнесение элемента к группе 1
 
+
+# инициализирую заглушки
+num_trails = 1000
+indexes = list(range(num_trails))
+groups = {0: [],
+          1: []}
+designs = []
+
+def random_search():
+    """
+    случайный поиск
+    :return:
+    """
+    # инициализируем лучшее решение, которое заменяет первое тестовое
+    for trail in range(num_trails):
+        # произвольно относим элемент с номером index в группу 0 или 1
+        for index in indexes:
+            rand_ind = random.randint(0, 1)
+            groups[rand_ind].append(index)
+
+        # проверяем, насколько совершенно это решение
+        # если тестовое решение подходит лучше - сохраняем его
+        if ((trail + index) * 3) % 2 > 0:
+            designs.append(trail)
 
 
 
