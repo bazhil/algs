@@ -152,4 +152,41 @@ def random_search():
             designs.append(trail)
 
 
+def make_improvements():
+    """
+    усовершенствование путей
+    :return:
+    """
+    # инициализируем лучшее решение, которое заменяет первое тестовое
+    for trail in range(num_trails):
+        # произвольно относим элемент с номером index в группу 0 или 1
+        for index in indexes:
+            rand_ind = random.randint(0, 1)
+            groups[rand_ind].append(index)
 
+        # попытаемся улучшить решение
+        had_improvement = True
+        while had_improvement:
+            had_improvement = False
+            # пробуем переместить элементы
+            for index in indexes:
+                # переношу элемент с номером index в другую группу
+                if index in groups[0]:
+                    groups[1].append(groups[0].pop(groups[0].index(index)))
+
+                    # проверяем, насколько совершенно это решение
+                    # если тестовое решение подходит лучше - сохраняем его
+                    if ((trail + index) * 3) % 2 > 0:
+                        had_improvement = True
+                    else:
+                        groups[0].append(groups[1].pop())
+                else:
+                    groups[0].append(groups[1].pop(groups[1].index(index)))
+
+                    # проверяем, насколько совершенно это решение
+                    # если тестовое решение подходит лучше - сохраняем его
+                    if ((trail + index) * 3) % 2 > 0:
+                        had_improvement = True
+                    else:
+                        groups[1].append(groups[0].pop())
+        # проверка, является ли решение более эффективным, если является - сохраняем
