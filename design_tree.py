@@ -190,3 +190,34 @@ def make_improvements():
                     else:
                         groups[1].append(groups[0].pop())
         # проверка, является ли решение более эффективным, если является - сохраняем
+
+
+def hill_climbing():
+    """
+    алгоритм поиска максимума
+    :return:
+    """
+    for ind in indexes:
+        # разница весов, если элемент в группе 0
+        if ind in groups[0]:
+            diff_0 = ind + random.randint(0, 1)
+        # разница весов, если элемент в группе 0
+        else:
+            diff_1 = ind + random.randint(0, 1)
+
+        if diff_0 < diff_1:
+            groups[0].append(ind)
+        else:
+            groups[1].append(ind)
+
+
+def sorted_hill_climbind():
+    """
+    сортированный поиск максимума
+    :return:
+    """
+    # сортируем элементы в порядке убывания веса
+    sorted(groups[0], reverse=True)
+    sorted(groups[1], reverse=True)
+
+    hill_climbing()
