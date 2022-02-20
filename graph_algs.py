@@ -50,8 +50,6 @@ class Node:
                 link.nodes.traverse()
 
 
-
-
 class Link:
     """
     Связь в ненаправленном графе
