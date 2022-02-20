@@ -33,6 +33,23 @@ class Node:
         """
         self.name = name
         self.links = links
+        # переменная, которая отмечает
+        self.visited = True
+
+
+    def traverse(self):
+        """
+        Обход в глубину
+        :return:
+        """
+        # помечаю узел, чтобы повторно не обходить
+        self.node.visited = True
+        # TODO: обработать текущий узел
+        for link in self.links:
+            if not link.nodes[1].visited:
+                link.nodes.traverse()
+
+
 
 
 class Link:
@@ -73,3 +90,5 @@ class OrderedLink:
         """
         self.cost = cost
         self.to_node = to_node
+
+
