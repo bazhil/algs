@@ -50,6 +50,32 @@ class Node:
                 link.nodes.traverse()
 
 
+    def depth_first_traverse(self, start_node):
+        """
+        Обход в глубину с использованием стека
+        :param start_node:
+        :return:
+        """
+        # посещаем узел
+        start_node.visiterd = True
+
+        # создаем стек и помещаем в него начальный узел
+        stack = []
+        stack.append(start_node)
+
+        # повторяем, пока стек не станет пустым
+        while len(stack) > 0:
+            node = stack.pop()
+            for link in node.links:
+                # используем узел только если он не посешался и отмечаем
+                if not link.nodes[0].visited:
+                    # действия над узлом
+                    link.nodes[0].visited = True
+                    stack.append(link.nodes[0])
+
+
+
+
 class Link:
     """
     Связь в ненаправленном графе
@@ -88,5 +114,3 @@ class OrderedLink:
         """
         self.cost = cost
         self.to_node = to_node
-
-
