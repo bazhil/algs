@@ -53,7 +53,7 @@ class Node:
     def depth_first_traverse(self, start_node):
         """
         Обход в глубину с использованием стека
-        :param start_node:
+        :param start_node: стартовый узел
         :return:
         """
         # посещаем узел
@@ -74,6 +74,21 @@ class Node:
                     stack.append(link.nodes[0])
 
 
+    def is_connected(self, start_node):
+        """
+        Алгоритм проверки связности
+        :param start_node: стартовый узел
+        :return:
+        """
+        # обходим сеть, начиная со start_node
+        self.traverse()
+
+        # смотрим, не остался ли какой-то узел не посещенным
+        for link in start_node.links:
+            if not link.nodes[0].visited:
+                return False
+
+        return True
 
 
 class Link:
@@ -101,6 +116,7 @@ class OrderedNode:
         """
         self.name = name
         self.links = []
+
 
 class OrderedLink:
     """
