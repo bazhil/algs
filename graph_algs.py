@@ -2,6 +2,7 @@
 """
 Файл с алгоритмами на графах
 """
+from .stack import Stack
 
 
 class GraphNode:
@@ -103,6 +104,7 @@ class Link:
         """
         self.cost = cost
         self.nodes = nodes
+        self.visited = False
 
 
 class OrderedNode:
@@ -130,3 +132,56 @@ class OrderedLink:
         """
         self.cost = cost
         self.to_node = to_node
+
+
+def get_connected_components(self, nodes: list):
+    """
+    Обход всех связанных элементов в сети
+    :param nodes: список узлов
+    :return: список связанных узлов
+    """
+    # количество посещенных узлов
+    num_visited = 0
+
+    # результат в виде списка списков
+    components = []
+
+    # инициализирую стек
+    stack = Stack()
+
+    # обходим, пока все узлы не попадут в связанный компонент
+    while num_visited < len(nodes):
+        # находим узел, который еще не посещали
+        start_node = None
+        for node in nodes:
+            if not node.visited:
+                start_node = node
+
+        # добавляем начальный узел в стек
+        stack.push(start_node)
+
+        num_visited += 1
+
+        # добавляем узел в новый связный компонент
+        component = []
+        component.append(start_node)
+        components.append(component)
+
+        # обрабатываем, пока стек не пустой
+        while stack.values:
+            # берем из стека следующий узел
+            node = stack.pop()
+            # обрабатываем звенья узла
+            for link in node.links:
+                # используем звено только если целевой узел еще не посещали
+                if not link.nodes[0].visited:
+                    link.nodes[0].visited = True
+
+                    # помечаем звено, как часть дерева
+                    link.visited = True
+                    num_visited += 1
+
+                    component.append(link.nodes[0])
+                    stack.push(link.nodes[0])
+
+    return components
