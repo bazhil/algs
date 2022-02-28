@@ -2,6 +2,7 @@
 """
 Файл с алгоритмами на графах
 """
+from sympy import S
 from .stack import Stack
 
 
@@ -185,3 +186,48 @@ def get_connected_components(self, nodes: list):
                     stack.push(link.nodes[0])
 
     return components
+
+
+def distance(start_node, end_node):
+    """
+    определяет расстояние между узлами
+    :param start_node: начальный узел
+    :param end_node: конечный узел
+    :return:
+    """
+    # считаю, что у каждого узла есть координаты, по которым можно определить расстояние
+    return abs(start_node.cooordinate - end_node.link.cooordinate)
+
+
+def via(start_node, end_node):
+    """
+    Определяет промежуточный путь
+    :param start_node: начальный узел
+    :param end_node: конечный узел
+    :return:
+    """
+    # если есть общие звенья - возвращаю их список
+    elems = set(start_node.links.nodes).intersection(end_node.links.nodes)
+    if len(elems) > 0:
+        return list(elems)
+
+
+def find_path(start_node, end_node):
+    """
+    Находит кратчайший путь от начального узла к целевому
+    :param start_node: начальный узел
+    :param end_node: конечный узел
+    :return:
+    """
+    # проверяю, если ли путь, между данными узлами
+    if distance(start_node, end_node) == S.Infinity:
+        return None
+
+    # получаем промежуточный узел для этого пути
+    via_node = via(start_node, end_node)
+    # если есть прямое соединение - возвращаю список, содержащий только конечный узел
+    if via_node == end_node:
+        return [end_node]
+    # если прямого соединения нет
+    else:
+        return find_path(start_node, via_node) + find_path(via_node, end_node)
