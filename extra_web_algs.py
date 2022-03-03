@@ -11,6 +11,7 @@ ordered_nodes = []
 def extend_partial_ordering(node):
     """
     Упорядочивает узлы
+    :param node: стартовый узел
     :return:
     """
     # пока в сети есть узлы рекурсивно обходим и собираем список упорядоченных узлов
@@ -28,6 +29,7 @@ def upgrated_extend_partial_ordering(node):
     """
     Усовершенствованное упорядочивание
     :return:
+    :param node: стартовый узел
     """
     # список узлов без предварительных условий
     ready = []
@@ -51,3 +53,15 @@ def upgrated_extend_partial_ordering(node):
     trigger = [node for node in ready if node.num_before_me == 0]
     if any(trigger):
         return None
+
+
+def contains_cycle(node):
+    """
+    Определяет наличие цикла
+    :param node: стартовый узел
+    :return:
+    """
+    # пытаемся отсортировать сеть топологически
+    if extend_partial_ordering(node) == None:
+        return True
+    return False
