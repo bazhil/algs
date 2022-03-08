@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from .graph_algs import GraphNode
+from .enqueue import Enqueue
 
 # инициализирую граф
 node = GraphNode()
@@ -65,3 +66,46 @@ def contains_cycle(node):
     if extend_partial_ordering(node) == None:
         return True
     return False
+
+
+# цвета для закрашивания (считаю что RGB)
+color1 = (0, 0, 0)
+color2 = (255, 255, 255)
+
+def two_color(node):
+    """
+    Алгоритм закрашивания двумя цветами
+    :param node: стартовый узел
+    :return:
+    """
+    # Создаем очередь для закрашенных узлов
+    colored = Enqueue()
+
+    # закрашиваю первый узел и добавляю его в список
+    first_node = node.neighbors[0]
+    first_node.Color = color1
+    colored.push(first_node)
+
+    # обходим сеть, закрашивая узлы
+    while colored.values:
+        # берем следующий узел из списка закрашенных
+        node = colored.pop()
+
+        # вычисляю цвет соседних узлов
+        neighbor_color = color2 if node.Color == color1 else color1
+
+        # Закрашиваем соседние узлы
+        for link in node.links:
+            neighbor = link.nodes[0]
+
+            # смотрим, не закрашены ли соседние узлы - если да, то объект невозможно закрасить
+            if neighbor.Color == node.Color:
+                return
+            # соседний узел уже был правильно закрашен, больше ничего не делаем
+            elif neighbor.Color == neighbor_color:
+                continue
+            # соседний узел не был закрашен, закрашиваем
+            else:
+                neighbor.Color = neighbor_color
+                colored.push(neighbor)
+
