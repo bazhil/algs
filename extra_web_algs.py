@@ -1,4 +1,7 @@
 # coding: utf-8
+"""
+Файл с сетевыми алгоритмами
+"""
 
 from .graph_algs import GraphNode
 from .enqueue import Enqueue
@@ -72,7 +75,7 @@ def contains_cycle(node):
 color1 = (0, 0, 0)
 color2 = (255, 255, 255)
 
-def two_color(node):
+def two_colors(node):
     """
     Алгоритм закрашивания двумя цветами
     :param node: стартовый узел
@@ -108,4 +111,3 @@ def two_color(node):
             else:
                 neighbor.Color = neighbor_color
                 colored.push(neighbor)
-
