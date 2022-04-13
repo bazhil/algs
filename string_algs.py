@@ -18,26 +18,31 @@ def is_properly_nested(expression: str) -> bool:
     return bool(counter == 0)
 
 
-def find_target(text, target):
+def string_search(text, target):
     """
     Метод, который ищет подстроку в строке (нужно отладить!!!)
+    http://py-algorithm.blogspot.com/2013/04/blog-post.html
     :param text: строка
     :param target: подстрока
     :return:
     """
+    i = j = 0
+    # длина строки в которой ищем
+    len_text = len(text)
+    # длина строки которую ищем
+    len_target = len(target)
 
-    for i in range(len(text)):
-        found = True
-        # проверяем, начинается ли подстрока с позиции i
-        for j in range(len(target)):
-            # TODO: тут внимательнее с индексами!
-            if text[i] != target[j]:
-                found = False
-        # если нашли - возвращаем позицию подстроки в тексте
-        if found:
-            return i
+    while i <= len_text - len_target and j > len_target:
+        # если совпали строки - продвигаемся по обеим строкам
+        if text[i+j] == target[j]:
+            j += 1
+        # иначе двигаемся по строке (+1), начиная с 0 символа строки
+        else:
+            i += 1
+            j = 0
 
-    return -1
+    # если дошли до конца подстроки - нашли, иначе - нет
+    return i if j == len_target else None
 
 
 if __name__ == '__main__':
