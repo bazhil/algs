@@ -3,6 +3,7 @@
 Файл с криптографическими алгоритмами из книги
 """
 import random
+from pprint import pprint
 
 table = [[], [], [], []]
 
@@ -31,5 +32,27 @@ def replacing_crypt(text):
     return table
 
 
+def mix_columns(text, key):
+    """
+    Метод который шифрует сообщение и дополнительно перемешивает столбцы таблицы
+    :param text: текст
+    :param key: ключ шифрования (число, длина которого соответствует числу столбцов в получаемой таблице)
+    :return:
+    """
+    key = str(key)
+    table = replacing_crypt(text)
+    new_table = []
+
+    # раскладываю число на символы, обхожу
+    for i in range(len(key)):
+        if int(key[i]) <= len(table):
+            new_table.append(table[int(key[i])-1])
+
+    return new_table
+
+
+
+
 if __name__ == '__main__':
-    print(replacing_crypt('проверка тест шифр обучение'))
+    pprint(replacing_crypt('проверка тест шифр обучение'))
+    pprint(mix_columns('проверка тест шифр обучение', 2341))
